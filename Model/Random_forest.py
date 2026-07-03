@@ -1,4 +1,4 @@
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV
 import joblib
@@ -10,7 +10,7 @@ class RF_MODEL:
         pass
 
     def rf_model(self):
-        rf = RandomForestRegressor(random_state=42)
+        rf = RandomForestClassifier(random_state=42)
 
         param_grid = {
             'n_estimators': [50, 100, 200],
@@ -34,21 +34,8 @@ class RF_MODEL:
 
         prediction = grid.best_estimator_.predict(io.X_test)
 
-        print(r2_score(io.y_test, prediction))
-
         best_model = grid.best_estimator_
 
-        rmse = mean_squared_error(
-            io.y_test,
-            prediction,
-        )
-
-        r2 = r2_score(
-            io.y_test,
-            prediction
-        )
-        print("RMSE :", rmse)
-        print("R² :", r2)
 
         joblib.dump(best_model,"ML_Model/RF/rfr.pkl")
 

@@ -24,5 +24,8 @@ dist/
 # Environment
 .env
 
-#models
+# models
 ML_Model/
+
+# Dataset
+Dataset/
