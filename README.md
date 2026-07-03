@@ -1,1 +1,1 @@
-# Agri-food-CO2-emission-dataset---Forecasting-ML
+# Agri-food-CO2-emission-dataset---ForeAI-Based Agri-Food CO₂ Emission Prediction and Forecasting System is an end-to-end machine learning project that analyzes historical agri-food sector emissions to predict total CO₂ emissions across countriescasting-ML
