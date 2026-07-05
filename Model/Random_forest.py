@@ -37,7 +37,7 @@ class RF_MODEL:
 
         print(classification_report(y_true=io.y_test,y_pred=prediction))
         value =confusion_matrix(y_true=io.y_test,y_pred=prediction)
-        plot =PLOT
+        plot =PLOT()
         plot.plot_confusion_matrix(value=value)
 
         best_model = grid.best_estimator_

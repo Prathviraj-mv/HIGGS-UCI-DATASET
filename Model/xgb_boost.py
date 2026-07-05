@@ -22,9 +22,13 @@ class XGB_MODEL:
         )
 
         param_grid = {
-            "n_estimators": [200, 400],
-            "max_depth": [6, 8],
-            "learning_rate": [0.05, 0.1],
+            "n_estimators": [100, 200, 300],
+            "max_depth": [4, 6, 8],
+            "learning_rate": [0.01, 0.05, 0.1],
+            "subsample": [0.8, 1.0],
+            "colsample_bytree": [0.8, 1.0],
+            "gamma": [0, 0.1, 0.3],
+            "min_child_weight": [1, 3, 5]
         }
 
         grid = GridSearchCV(
@@ -53,7 +57,7 @@ class XGB_MODEL:
 
         value = confusion_matrix(io.y_test, prediction)
 
-        plot = PLOT
+        plot = PLOT()
         plot.plot_confusion_matrix(value=value)
 
         best_model = grid.best_estimator_
