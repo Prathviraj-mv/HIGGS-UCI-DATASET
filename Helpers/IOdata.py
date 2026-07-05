@@ -8,8 +8,8 @@ class IO:
 
         data = DATA().return_data()
 
-        X = data.drop("total_emission", axis=1)
-        y = data["total_emission"]
+        X = data.drop("label", axis=1)
+        y = data["label"]
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             X,
