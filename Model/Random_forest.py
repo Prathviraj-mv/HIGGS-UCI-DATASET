@@ -10,7 +10,8 @@ from Helpers.plotters import PLOT
 
 class RF_MODEL:
     def __init__(self):
-        pass
+        self.plot =PLOT()
+        self.io = IO()
 
     def rf_model(self):
         rf = RandomForestClassifier(random_state=42)
@@ -31,16 +32,21 @@ class RF_MODEL:
             n_jobs=-1,
             verbose=2
         )
-        io = IO()
 
-        grid.fit(io.X_train, io.y_train)
 
-        prediction = grid.best_estimator_.predict(io.X_test)
+        grid.fit(self.io.X_train, self.io.y_train)
+        print("\nBest Cross Validation Accuracy:")
+        print(grid.best_score_)
+        print("\nBest Params:")
+        print(grid.best_params_)
+        prediction = grid.best_estimator_.predict(self.io.X_test)
 
-        print(classification_report(y_true=io.y_test, y_pred=prediction))
-        value = confusion_matrix(y_true=io.y_test, y_pred=prediction)
-        plot = PLOT()
-        plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_rf)
+        print(classification_report(y_true=self.io.y_test, y_pred=prediction))
+        value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
+
+
+
+        self.plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_rf)
 
         best_model = grid.best_estimator_
 

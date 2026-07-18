@@ -15,6 +15,7 @@ from Helpers.plotters import PLOT
 class LR_MODEL:
     def __init__(self):
         self.io = IO()
+        self.plot = PLOT()
 
     def lr_model(self):
         scaler = StandardScaler()
@@ -44,8 +45,8 @@ class LR_MODEL:
 
         print(classification_report(y_true=self.io.y_test, y_pred=prediction))
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
-        plot = PLOT()
-        plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_lr)
+
+        self.plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_lr)
 
         joblib.dump(lr, "ML_Model/LR/lr.pkl")
 

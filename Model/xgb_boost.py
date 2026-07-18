@@ -10,7 +10,9 @@ from Helpers.plotters import PLOT
 
 class XGB_MODEL:
     def __init__(self):
-        pass
+        self.io = IO()
+        self.plot = PLOT()
+
 
     def xgb_model(self):
         xgb = XGBClassifier(
@@ -39,11 +41,10 @@ class XGB_MODEL:
             verbose=2
         )
 
-        io = IO()
 
-        grid.fit(io.X_train, io.y_train)
+        grid.fit(self.io.X_train, self.io.y_train)
 
-        prediction = grid.best_estimator_.predict(io.X_test)
+        prediction = grid.best_estimator_.predict(self.io.X_test)
 
         print("\nBest Parameters:")
         print(grid.best_params_)
@@ -52,12 +53,12 @@ class XGB_MODEL:
         print(grid.best_score_)
 
         print("\nClassification Report")
-        print(classification_report(io.y_test, prediction))
+        print(classification_report(self.io.y_test, prediction))
 
-        value = confusion_matrix(io.y_test, prediction)
+        value = confusion_matrix(self.io.y_test, prediction)
 
-        plot = PLOT()
-        plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_xg)  # directory for the plot to be saved
+
+        self.plot.plot_confusion_matrix(value=value, x=OUTPUT_DIR_xg)  # directory for the plot to be saved
 
         best_model = grid.best_estimator_
 

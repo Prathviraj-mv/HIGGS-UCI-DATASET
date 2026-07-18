@@ -13,5 +13,7 @@ OUTPUT_DIR_rf = ROOT_DIR / "Plots" / "RF"
 OUTPUT_DIR_lr = ROOT_DIR / "Plots" / "LR"
 OUTPUT_DIR_xg = ROOT_DIR / "Plots" / "XG"
 OUTPUT_DIR_kn = ROOT_DIR / "Plots" / "KN"
+OUTPUT_DIR_dt = ROOT_DIR / "Plots" / "DT"
+
 
 
