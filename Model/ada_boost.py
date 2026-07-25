@@ -1,6 +1,7 @@
-# KNN Model Implementation
+# AdaBoost Model Implementation
 
-from sklearn.neighbors import KNeighborsClassifier
+
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -8,25 +9,24 @@ import joblib
 from Helpers.plotters import PLOT
 
 
-class KNN:
+class AdaBoost:
     def __init__(self, io):
         self.io = io
         self.plt = PLOT()
         
     def train(self):
-
-        knn = KNeighborsClassifier()
+        adaboost = AdaBoostClassifier()
         param_grid = {
-            'n_neighbors': [3, 5, 7, 9, 11],
-            'weights': ['uniform', 'distance'],
-            'metric': ['euclidean', 'manhattan', 'minkowski']
+            'n_estimators': [50, 100, 200],
+            'learning_rate': [0.01, 0.1, 1.0],
+            'algorithm': ['SAMME', 'SAMME.R']
         }
 
-        grid = GridSearchCV(knn, 
-                param_grid, 
-                cv=5,
-                scoring='accuracy', 
-                n_jobs=-1)
+        grid = GridSearchCV(adaboost,
+                    param_grid, 
+                    cv=5,
+                    scoring='accuracy',
+                    n_jobs=-1)
         grid.fit(self.io.X_train, self.io.y_train)
 
         print(grid.best_params_)
@@ -35,11 +35,9 @@ class KNN:
 
 
         print(classification_report(y_true=self.io.y_test, y_pred=prediction))
-        joblib.dump(grid.best_estimator_, "ML_Model/KNN/knn.pkl")
+        joblib.dump(grid.best_estimator_, "ML_Model/ADA/ada.pkl")
 
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
-        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_knn)
+        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_adaboost)
 
         return None
-
-

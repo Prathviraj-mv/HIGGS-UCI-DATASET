@@ -1,32 +1,32 @@
-# KNN Model Implementation
+# Support Vector Machine Model Implementation
 
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 import joblib
 from Helpers.plotters import PLOT
+from Definitions.constants import OUTPUT_DIR_svm
 
-
-class KNN:
+class SVM:
     def __init__(self, io):
         self.io = io
         self.plt = PLOT()
         
     def train(self):
-
-        knn = KNeighborsClassifier()
+        svm = SVC()
         param_grid = {
-            'n_neighbors': [3, 5, 7, 9, 11],
-            'weights': ['uniform', 'distance'],
-            'metric': ['euclidean', 'manhattan', 'minkowski']
+            'C': [0.1, 1, 10],
+            'kernel': ['linear', 'rbf', 'poly'],
+            'gamma': ['scale', 'auto']
         }
 
-        grid = GridSearchCV(knn, 
-                param_grid, 
-                cv=5,
-                scoring='accuracy', 
-                n_jobs=-1)
+        grid = GridSearchCV(svm,
+                            param_grid,
+                            cv=5,
+                            scoring='accuracy',
+                            n_jobs=-1)
+
         grid.fit(self.io.X_train, self.io.y_train)
 
         print(grid.best_params_)
@@ -35,11 +35,9 @@ class KNN:
 
 
         print(classification_report(y_true=self.io.y_test, y_pred=prediction))
-        joblib.dump(grid.best_estimator_, "ML_Model/KNN/knn.pkl")
+        joblib.dump(grid.best_estimator_, "ML_Model/SVM/svm.pkl")
 
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
-        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_knn)
+        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_svm)
 
         return None
-
-
