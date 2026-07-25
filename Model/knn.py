@@ -6,11 +6,14 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 import joblib
 from Helpers.plotters import PLOT
+from Helpers.results_logger import ResultsLogger
+from Definitions.constants import OUTPUT_DIR_kn
+from Helpers.IOdata import IO
 
 
 class KNN:
-    def __init__(self, io):
-        self.io = io
+    def __init__(self):
+        self.io = IO()
         self.plt = PLOT()
         
     def train(self):
@@ -38,7 +41,18 @@ class KNN:
         joblib.dump(grid.best_estimator_, "ML_Model/KNN/knn.pkl")
 
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
-        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_knn)
+        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_kn)
+
+         # Initialize results logger
+        logger = ResultsLogger("knn")
+        
+        # Log results to file
+        logger.log_results(
+            best_params=grid.best_params_,
+            best_score=grid.best_score_,
+            classification_report_text=classification_report(self.io.y_test, prediction),
+            confusion_matrix=confusion_matrix(self.io.y_test, prediction)
+        )
 
         return None
 

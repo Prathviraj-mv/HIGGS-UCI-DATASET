@@ -6,6 +6,7 @@ from xgboost import XGBClassifier
 from Definitions.constants import OUTPUT_DIR_xg
 from Helpers.IOdata import IO
 from Helpers.plotters import PLOT
+from Helpers.results_logger import ResultsLogger
 
 
 class XGB_MODEL:
@@ -46,14 +47,16 @@ class XGB_MODEL:
 
         prediction = grid.best_estimator_.predict(self.io.X_test)
 
-        print("\nBest Parameters:")
-        print(grid.best_params_)
-
-        print("\nBest Cross Validation Accuracy:")
-        print(grid.best_score_)
-
-        print("\nClassification Report")
-        print(classification_report(self.io.y_test, prediction))
+        # Initialize results logger
+        logger = ResultsLogger("XGBoost")
+        
+        # Log results to file
+        logger.log_results(
+            best_params=grid.best_params_,
+            best_score=grid.best_score_,
+            classification_report_text=classification_report(self.io.y_test, prediction),
+            confusion_matrix=confusion_matrix(self.io.y_test, prediction)
+        )
 
         value = confusion_matrix(self.io.y_test, prediction)
 

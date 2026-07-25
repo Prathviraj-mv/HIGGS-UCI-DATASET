@@ -7,6 +7,7 @@ from sklearn.tree import DecisionTreeClassifier
 from Helpers.IOdata import IO
 from Helpers.plotters import PLOT
 from Definitions.constants import OUTPUT_DIR_dt
+from Helpers.results_logger import ResultsLogger
 
 class DT:
     def __init__(self):
@@ -37,14 +38,17 @@ class DT:
 
         grid.fit(X_train, self.io.y_train)
 
-        print("best model score")
-        print(grid.best_params_)
-
         prediction = grid.predict(X_test)
 
-        print(classification_report(
-            y_true=self.io.y_test,
-            y_pred=prediction)
+        # Initialize results logger
+        logger = ResultsLogger("DecisionTree")
+        
+        # Log results to file
+        logger.log_results(
+            best_params=grid.best_params_,
+            best_score=grid.best_score_,
+            classification_report_text=classification_report(self.io.y_test, prediction),
+            confusion_matrix=confusion_matrix(self.io.y_test, prediction)
         )
 
         joblib.dump(grid.best_estimator_, "ML_Model/DT/decision_tree.pkl")

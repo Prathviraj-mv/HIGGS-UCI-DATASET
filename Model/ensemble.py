@@ -9,6 +9,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 import joblib
 from Helpers.plotters import PLOT
+from Helpers.results_logger import ResultsLogger
 
 
 class Ensemble:
@@ -49,6 +50,17 @@ class Ensemble:
         print(classification_report(y_true=self.io.y_test, y_pred=prediction))
 
         joblib.dump(grid.best_estimator_, "ML_Model/ENSEMBLE/ensemble.pkl")
+        
+        # Initialize results logger
+        logger = ResultsLogger("ensemble")
+        
+        # Log results to file
+        logger.log_results(
+            best_params=grid.best_params_,
+            best_score=grid.best_score_,
+            classification_report_text=classification_report(self.io.y_test, prediction),
+            confusion_matrix=confusion_matrix(self.io.y_test, prediction)
+        )
 
 
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
