@@ -28,7 +28,8 @@ class KNN:
         grid = GridSearchCV(knn, 
                 param_grid, 
                 cv=5,
-                scoring='accuracy', 
+                scoring='accuracy',
+                verbose=True,
                 n_jobs=-1)
         grid.fit(self.io.X_train, self.io.y_train)
 
