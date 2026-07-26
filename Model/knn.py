@@ -20,9 +20,10 @@ class KNN:
 
         knn = KNeighborsClassifier()
         param_grid = {
-            'n_neighbors': [3, 5, 7, 9, 11],
-            'weights': ['uniform', 'distance'],
-            'metric': ['euclidean', 'manhattan', 'minkowski']
+            'n_neighbors': [3],
+        # , 5, 7, 9, 11
+            # 'weights': ['uniform', 'distance'],
+            # 'metric': ['euclidean', 'manhattan', 'minkowski']
         }
 
         grid = GridSearchCV(knn, 

@@ -16,10 +16,12 @@ from Model.svm import SVM
 
 class APP_:
     def __init__(self):
-        print("LAUNCH AWAY")
-        EDA().run()
+        print("KNN AWAY")
+        # EDA().run()
         DATA().return_data()
         KNN().train()
+        print("KNN DONE")
+
         LR_MODEL().lr_model()
         XGB_MODEL().xgb_model()
         RF_MODEL().rf_model()
