@@ -36,7 +36,7 @@ class LightGBM:
 
         prediction = grid.predict(self.io.X_test)
 
-                # Initialize results logger
+        # Initialize results logger
         logger = ResultsLogger("LIGHTGBM")
         
         # Log results to file
