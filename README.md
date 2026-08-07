@@ -1,7 +1,7 @@
 # HIGGS Boson Classification
 
 <p>
-  < img src = "Images/Screenshot 2026-08-07 163719.png">
+  <img src = "Images/Screenshot 2026-08-07 163719.png">
 </p>
 *Interactive Dashboard for Model Training and Selection*
 
