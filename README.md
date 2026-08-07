@@ -3,7 +3,6 @@
 <p>
   <img src = "Images/Screenshot 2026-08-07 163719.png">
 </p>
-*Interactive Dashboard for Model Training and Selection*
 
 A machine learning pipeline for detecting Higgs bosons from particle collider data using ensemble methods and gradient boosting.
 
