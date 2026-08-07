@@ -19,8 +19,10 @@ OUTPUT_DIR_cb = ROOT_DIR / "Plots" / "CB"
 OUTPUT_DIR_nn = ROOT_DIR / "Plots" / "NN"
 OUTPUT_DIR_svm = ROOT_DIR / "Plots" / "SVM"
 OUTPUT_DIR_ada = ROOT_DIR / "Plots" / "ADA"
+OUTPUT_DIR_adaboost = ROOT_DIR / "Plots" / "ADA"
 OUTPUT_DIR_nb = ROOT_DIR / "Plots" / "NB"
 OUTPUT_DIR_ens = ROOT_DIR / "Plots" / "ENS"
+OUTPUT_DIR_ensemble = ROOT_DIR / "Plots" / "ENS"
 
 
 

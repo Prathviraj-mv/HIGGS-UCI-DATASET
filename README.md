@@ -1,5 +1,8 @@
 # HIGGS Boson Classification
 
+![Dashboard Screenshot](dashboard_screenshot.png)
+*Interactive Dashboard for Model Training and Selection*
+
 A machine learning pipeline for detecting Higgs bosons from particle collider data using ensemble methods and gradient boosting.
 
 ## Overview
@@ -10,6 +13,7 @@ This project implements a complete classification workflow to distinguish betwee
 
 - **Data Processing**: Loads and preprocesses 500K samples from the HIGGS dataset with 28 kinematic features
 - **Exploratory Analysis**: Generates comprehensive visualizations including correlation heatmaps, distribution plots, and pair plots
+- **Interactive Dashboard**: GUI-based model selection and training interface with real-time progress tracking
 - **Model Training**: Trains 12+ classifiers with hyperparameter optimization:
   - XGBoost (GPU-accelerated)
   - LightGBM
@@ -65,6 +69,21 @@ pip install -r requirements.txt
 - joblib
 
 ## Usage
+
+### Interactive Dashboard (Recommended)
+
+Launch the interactive GUI dashboard for easy model selection and training:
+
+```bash
+python tkinter_dashboard.py
+```
+
+The dashboard provides:
+- ✅ **Model Selection**: Checkboxes to select which models to train
+- 🚀 **One-Click Training**: Train selected models with progress tracking
+- 📊 **Real-time Results**: View training status and results in real-time
+- 📁 **File Manager Integration**: Open saved models, results, and plots directly in your file manager
+- ⚙️ **Batch Training**: Train multiple models sequentially with automatic progress updates
 
 ### Quick Start
 
@@ -141,6 +160,7 @@ HIGGS-UCI-DATASET/
 ├── Results/               # Training results and metrics
 ├── app.py                 # Main application orchestrator
 ├── run.py                 # Entry point
+├── tkinter_dashboard.py   # Interactive GUI dashboard
 └── requirements.txt
 ```
 

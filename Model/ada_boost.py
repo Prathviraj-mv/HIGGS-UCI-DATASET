@@ -8,11 +8,16 @@ from sklearn.metrics import confusion_matrix
 import joblib
 from Helpers.plotters import PLOT
 from Helpers.results_logger import ResultsLogger
+from Definitions.constants import OUTPUT_DIR_adaboost
 
 
 class AdaBoost:
-    def __init__(self, io):
-        self.io = io
+    def __init__(self, io=None):
+        if io is None:
+            from Helpers.IOdata import IO
+            self.io = IO()
+        else:
+            self.io = io
         self.plt = PLOT()
         
     def train(self):

@@ -1,0 +1,7 @@
+This is a placeholder for the dashboard screenshot. 
+
+To add a real screenshot:
+1. Run the dashboard: python tkinter_dashboard.py
+2. Take a screenshot of the window
+3. Save it as dashboard_screenshot.png in the project root
+4. Replace this file with your screenshot

@@ -4,4 +4,6 @@ matplotlib
 scikit-learn
 xgboost
 joblib
+lightgbm
+catboost
 

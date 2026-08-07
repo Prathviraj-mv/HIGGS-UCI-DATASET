@@ -8,11 +8,16 @@ from sklearn.metrics import confusion_matrix
 import joblib
 from Helpers.plotters import PLOT
 from Helpers.results_logger import ResultsLogger
+from Definitions.constants import OUTPUT_DIR_cb
 
 
 class CatBoost:
-    def __init__(self, io):
-        self.io = io
+    def __init__(self, io=None):
+        if io is None:
+            from Helpers.IOdata import IO
+            self.io = IO()
+        else:
+            self.io = io
         self.plt = PLOT()
         
     def train(self):
@@ -48,6 +53,6 @@ class CatBoost:
         joblib.dump(grid.best_estimator_, "ML_Model/CAT/catboost.pkl")
 
         value = confusion_matrix(y_true=self.io.y_test, y_pred=prediction)
-        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_catboost)
+        self.plt.plot_confusion_matrix(value=value, x=OUTPUT_DIR_cb)
 
         return None

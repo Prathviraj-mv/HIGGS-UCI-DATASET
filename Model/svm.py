@@ -9,8 +9,12 @@ from Helpers.plotters import PLOT
 from Definitions.constants import OUTPUT_DIR_svm
 
 class SVM:
-    def __init__(self, io):
-        self.io = io
+    def __init__(self, io=None):
+        if io is None:
+            from Helpers.IOdata import IO
+            self.io = IO()
+        else:
+            self.io = io
         self.plt = PLOT()
         
     def train(self):
